@@ -1,0 +1,5 @@
+GNUBOARD4 DTD
+http://sir.co.kr/
+
+GPL Version 2 licenses.
+http://www.gnu.org/licenses/gpl2.html

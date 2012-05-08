@@ -1,0 +1,110 @@
+charset "utf-8";
+/* default style */
+body{margin:0; padding:0; font-size:75%; font-family:"돋움", Dotum, "Lucida Grande", Tahoma, Verdana, AppleGothic, sans-serif;}
+h1, h2, h3, h4, h5, h6, form, p{margin:0; padding:0;}
+legend, hr{display:none;}
+p, div, th, td, select, input{color:#555;}
+a:link, a:visited{color:#666; text-decoration:none;}
+a:active, a:hover, a:focus{color:#000; text-decoration:none;}
+a img, input.type-image{border:0 none;}
+input.type-text, textarea{border:1px solid #ddd; background:#fff; padding:1px;}
+input.type-text:hover, input.type-text:focus, textarea:hover, textarea:focus{background-color:#ffd;}
+input, select, textarea{vertical-align:top; color:#333;}
+select{font-family:Dotum, "돋움", sans-serif;}
+ul, li{margin:0; padding:0; list-style:none;}
+fieldset{margin:0; padding:0; border:0;}
+table{border-collapse:collapse;}
+img{font-size:0; line-height:0;}
+
+.skip{position:absolute; top:0; left:-9000px; width:0; height:0; font-size:0; line-height:0;}
+.clear{display:block; clear:both;}
+.top{margin:0 0 30px 0; padding:0 10px 8px 0; text-align:right; background:#f2f2f2;}
+.center{text-align:center;}
+.caution{clear:both; padding:8px 0;}
+.btn_area{overflow:hidden; width:100%; padding:0 0 15px 0;}
+
+/* table */
+.normal{clear:both; width:100%; border-top:2px solid #ccc; border-collapse:collapse; border-spacing:0; empty-cells:show;}
+.normal th{padding:6px 0; color:#616161; background:#fbf8ee; border-bottom:1px solid #ccc;}
+.normal td{padding:5px 0; text-align:center; color:#616161; border-bottom:1px solid #ccc;}
+
+.normal2{width:100%; margin:0 0 30px 0; border-top:2px solid #ccc; border-collapse:collapse; border-spacing:0; empty-cells:show;}
+.normal2 th{padding:6px 15px 6px 0; text-align:right; color:#616161; border-bottom:1px solid #ccc;}
+.normal2 td{padding:5px 0; color:#616161; border-bottom:1px solid #ccc;}
+.normal2 .heavy th,
+.normal2 .heavy td{border-bottom:2px solid #ccc;}
+
+.normal3{width:100%; margin:0 0 30px 0; border-top:2px solid #ccc; border-bottom:1px solid #ccc; border-collapse:collapse; border-spacing:0; empty-cells:show;}
+.normal3 th{padding:6px 0; text-align:left;}
+.normal3 td{padding:6px 0; text-align:left;}
+.normal3 .heavy th,
+.normal3 .heavy td{border-bottom:2px solid #ccc;}
+
+.list_table{clear:both; width:100%; margin:0 0 10px 0; border-top:2px solid #ccc; border-collapse:collapse; border-spacing:0; empty-cells:show;}
+.list_table th{padding:6px 0; background:#fbf8ee; border-bottom:1px solid #ccc;}
+.list_table a{color:#cd7444;}
+.list_table td{padding:5px 0; text-align:center; color:#616161; border-bottom:1px solid #ccc;}
+.list_table .list1 td{background:#f8f8f8;}
+.list_table .tfl {text-align:left;}
+.list_table .tfc {text-align:center;}
+.list_table .tfr {text-align:right;}
+.list_table .nodata{padding:40px 0;}
+
+/*
+layout
+*/
+#adm_container{width:1004px;}
+#adm_header{position:relative; height:67px; padding:3px 0 0 0; background:#e3dcd2; border-bottom:1px solid #fff;}
+#adm_content{overflow:hidden; width:1004px; border-top:2px solid #e5e5e5;}
+
+#aside{float:left; width:180px;}
+#article{float:left; width:823px; border-left:1px solid #dbdbdb;}
+
+/* 
+header 
+*/
+#adm_header h1{float:left; margin:0 1px 0 0; line-height:0; font-size:0;}
+
+#adm_header .mainmenu{float:left; width:700px;}
+#adm_header .mainmenu li{display:inline; margin:0 8px 0 0;}
+#adm_header .mainmenu li ul{position:absolute; top:0; left:0; width:127px; background:#fef8f0; border:1px solid #efca95;}
+#adm_header .mainmenu li ul li{display:block; width:97px; padding:3px 15px;}
+#adm_header .mainmenu li ul li.line{border-top:1px solid #efca95;}
+
+/* 
+aside 
+*/
+#aside .top_menu li{float:left;}
+#aside .side_menu{padding:0 13px;}
+#aside .side_menu li{padding:3px 0 3px 20px;}
+#aside .side_menu li.line{border-top:1px dotted #ccc;}
+
+/* 
+article 
+*/
+#article .loc{padding:6px 5px 6px 0; text-align:right; line-height:1.2em; background:#f8f8f8;}
+#article .loc a{color:#cd7444;}
+#article .loc a:hover,
+#article .loc a:active{text-decoration:underline;}
+
+/* contentArea */
+#contentArea{padding:15px 15px 40px 15px;}
+#contentArea .subtitle{overflow:hidden; width:100%; margin:0 0 0 0;}
+#contentArea .subtitle h3{font-size:100%; color:#525252;}
+
+#contentArea .fr{padding:0 0 5px 0;}
+
+#contentArea .info{clear:both;}
+
+/* adm sendmail */
+#adm_sendmail p{margin:0 0 10px 0;}
+#adm_sendmail p.mail{padding-top:15px;}
+
+/* adm member */
+.list_status{overflow:hidden; width:100%;}
+
+/* adm visit */
+.list_status{padding:5px 0 10px 0;}
+
+/* adm help */
+.csshelp1{border:3px solid #ccc; background-color:#fff;}
