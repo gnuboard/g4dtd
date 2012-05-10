@@ -51,7 +51,7 @@ function get_perms($mode)
 
 // 파일이 존재한다면 설치할 수 없다.
 if (file_exists("../data/dbconfig.php")) {
-    echo "<meta http-equiv='content-type' content='text/html; charset=$g4[charset]'>";
+    echo "<meta http-equiv='content-type' content='text/html; charset={$g4['charset']}'>";
     echo <<<HEREDOC
     <script type='text/javascript'>
     alert("설치하실 수 없습니다.");
@@ -63,7 +63,7 @@ HEREDOC;
 
 if (!is_dir("../data"))
 {
-    echo "<meta http-equiv='content-type' content='text/html; charset=$g4[charset]'>";
+    echo "<meta http-equiv='content-type' content='text/html; charset={$g4['charset']}'>";
     echo "<script type='text/javascript'>alert('루트 디렉토리에 data 디렉토리를 만들어 주시기 바랍니다.');</script>";
     exit;
 }
@@ -71,14 +71,14 @@ if (!is_dir("../data"))
 // data 디렉토리에 파일 생성 가능한지 검사.
 if (!is_writeable("../data"))
 {
-    echo "<meta http-equiv='content-type' content='text/html; charset=$g4[charset]'>";
+    echo "<meta http-equiv='content-type' content='text/html; charset={$g4['charset']}'>";
     echo "<script type='text/javascript'>alert('data 디렉토리의 퍼미션을 707로 변경하여 주십시오.\\n\\n$> chmod 707 data \\n\\n그 다음 설치하여 주십시오.');</script>";
     exit;
 }
 ?>
 <html>
 <head>
-<meta http-equiv="content-type" content="text/html; charset=<?=$g4[charset]?>">
+<meta http-equiv="content-type" content="text/html; charset=<?=$g4['charset']?>">
 <title>그누보드4 설치 (1/3) - 라이센스(License)</title>
 <style type="text/css">
 <!--
