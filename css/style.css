@@ -47,15 +47,15 @@ textarea.textarea { width:97%; border:1px solid #9A9A9A; border-right:1px solid 
 */
 
 /* 상단 메뉴 - 왼쪽 */
-#head_menu { position:relative; clear:both; height:32px; padding:1px 0 0 10px; background:#3c3c3c url(../images/bg_gnb.gif) repeat-x left top; }
+#head_menu { position:relative; clear:both; height:32px; padding:1px 0 0 10px; background:#3c3c3c; }
 #head_menu ul.menu { display:inline; float:left; margin:7px 30px 0; padding:0; }
-#head_menu ul.menu li { display:inline; margin:0 9px 0 0; padding-left:9px; vertical-align:top; background:url(../images/bg_gnb_bar.gif) no-repeat left 3px; }
+#head_menu ul.menu li { display:inline; margin:0 9px 0 0; padding-left:9px; vertical-align:top; }
 #head_menu ul.menu li.first-child { background:none; padding:0; }
 #head_menu ul.menu li a { color:#fff; }
 
 /* 상단 메뉴 - 오른쪽 */
 #head_menu ul.etc {position:absolute; right:30px; margin:7px 0 0 0;}
-#head_menu ul.etc li {display:inline; padding:0 9px 0 4px;background:url(../images/bg_gnb_bar.gif) no-repeat right top; padding:0 5px}
+#head_menu ul.etc li {display:inline; padding:0 9px 0 4px; padding:0 5px}
 #head_menu ul.etc a {color:#fafafa;}
 #head_menu ul.etc li.last {font-weight:bold; padding-right:0; background:none;}
 
@@ -153,7 +153,7 @@ textarea.textarea { width:97%; border:1px solid #9A9A9A; border-right:1px solid 
 .latest_area .list li img { vertical-align:middle }
 .latest_area .list li a { }
 /* .latest_area .list li{ position:relative; padding:0 10px 5px 7px; text-align:justify; line-height:18px; background:url(../images/icon_list.gif) no-repeat 0 7px;} */
-.latest_area .list li{ position:relative; padding:0 10px 5px 27px; text-align:justify; line-height:18px; background:url(../img/icon_list.gif) no-repeat 0 0;}
+.latest_area .list li{ position:relative; padding:0 10px 5px 27px; text-align:justify; line-height:18px;}
 .latest_area .list li.notice { font-weight:bold; }
 .latest_area .list li.reply { background:none; }
 .latest_area .list li .comment { font:9px tahoma; color:#f24017; }
