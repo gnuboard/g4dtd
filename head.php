@@ -12,7 +12,7 @@ include_once($g4['path'].'/lib/connect.lib.php');
 // 사용자 화면 상단과 좌측을 담당하는 페이지입니다.
 // 상단, 좌측 화면을 꾸미려면 이 파일을 수정합니다.
 ?>
-
+<h1>지운아빠강좌01</h1>
 <div id="wrap">
 
     <div id="head">
