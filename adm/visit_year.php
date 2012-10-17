@@ -61,7 +61,7 @@ if (count($arr)) {
 
         $list = ($k++%2);
         echo "
-        <tr class='list$list>
+        <tr class='list$list'>
             <td><a href='./visit_month.php?fr_date=$key-01-01&amp;to_date=$key-12-31'>$key</a></td>
             <td>".number_format($value)."</td>
             <td>$s_rate</td>
