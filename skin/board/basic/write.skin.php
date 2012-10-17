@@ -84,7 +84,7 @@ var ca_name = "<?php echo $write['ca_name']?>";
     <?php } ?>
     <tr>
         <th>제목</th>
-        <td><input type="text" id="wr_subject" name="wr_subject" class="text title required" title="제목" value="<?php echo $subject?>" /></td>
+        <td><input type="text" id="wr_subject" name="wr_subject" maxlength="255" class="text title required" title="제목" value="<?php echo $subject?>" /></td>
     </tr>
     <tr>
         <td colspan="2">
