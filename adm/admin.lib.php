@@ -282,18 +282,7 @@ if (!$member['mb_id'])
 }
 else if ($is_admin != "super")
 {
-    $auth = array();
-    $sql = " select au_menu, au_auth from {$g4['auth_table']} where mb_id = '{$member['mb_id']}' ";
-    $result = sql_query($sql);
-    for($i=0; $row=sql_fetch_array($result); $i++)
-    {
-        $auth[$row['au_menu']] = $row['au_auth'];
-    }
-
-    if (!$i)
-    {
-        alert("최고관리자 또는 관리권한이 있는 회원만 접근 가능합니다.", $g4['path']);
-    }
+    alert("최고관리자만 접근 가능합니다.", $g4['path']);
 }
 
 // 관리자의 아이피, 브라우저와 다르다면 세션을 끊고 관리자에게 메일을 보낸다.
