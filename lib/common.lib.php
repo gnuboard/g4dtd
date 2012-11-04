@@ -424,12 +424,14 @@ function conv_subject($subject, $len, $suffix="")
 // OBJECT 태그의 XSS 막기
 function bad120422($matches)
 {
-    $code = $matches[1];
-    if (preg_match("#script#i", $code)) {
-        return "OBJECT 태그에 스크립트는 사용 불가합니다.";
-    } else if (preg_match("#base64#i", $code)) {
-        return "OBJECT 태그에 BASE64는 사용 불가합니다.";
+    $tag  = $matches[1];
+    $code = $matches[2];
+    if (preg_match("#\bscript\b#i", $code)) {
+        return "$tag 태그에 스크립트는 사용 불가합니다.";
+    } else if (preg_match("#\bbase64\b#i", $code)) {
+        return "$tag 태그에 BASE64는 사용 불가합니다.";
     }
+    return $matches[0];
 }
 
 
@@ -465,31 +467,31 @@ function conv_content($content, $html)
         // XSS (Cross Site Script) 막기
         // 완벽한 XSS 방지는 없다.
 
-        // object 태그에서 javascript 코드 막기
-        $content = preg_replace_callback("#<object([^>]+)>#i", "bad120422", $content);
-
-        // 081022 : CSRF 방지
-        //$content = preg_replace("/(on)(abort|blur|change|click|dblclick|dragdrop|error|focus|keydown|keypress|keyup|load|mousedown|mousemove|mouseout|mouseover|mouseup|mouseenter|mouseleave|move|reset|resize|select|submit|unload)/i", "$1<!-- XSS Filter -->$2", $content);
-        //$content = preg_replace("/(on)([^\=]+)/i", "&#111;&#110;$2", $content);
-        
         // 이런 경우를 방지함 <IMG STYLE="xss:expr/*XSS*/ession(alert('XSS'))">
-        $content = preg_replace("#\/\*.*\*\/#iU", "", $content);
+        //$content = preg_replace("#\/\*.*\*\/#iU", "", $content);
+        // 위의 정규식이 아래와 같은 내용을 통과시키므로 not greedy(비탐욕수량자?) 옵션을 제거함. ignore case 옵션도 필요 없으므로 제거
+        // <IMG STYLE="xss:ex//*XSS*/**/pression(alert('XSS'))"></IMG>
+        $content = preg_replace("#\/\*.*\*\/#", "", $content);
+
+        // object, embed 태그에서 javascript 코드 막기
+        $content = preg_replace_callback("#<(object|embed)([^>]+)>#i", "bad120422", $content);
 
         $content = preg_replace("/(on)([a-z]+)([^a-z]*)(\=)/i", "&#111;&#110;$2$3$4", $content);
         $content = preg_replace("/(dy)(nsrc)/i", "&#100;&#121;$2", $content);
         $content = preg_replace("/(lo)(wsrc)/i", "&#108;&#111;$2", $content);
         $content = preg_replace("/(sc)(ript)/i", "&#115;&#99;$2", $content);
-        //$content = preg_replace("/(ex)(pression)/i", "&#101&#120;$2", $content);
+        $content = preg_replace_callback("#<([^>]+)#", create_function('$m', 'return "<".str_replace("<", "&lt;", $m[1]);'), $content);
         $content = preg_replace("/\<(\w|\s|\?)*(xml)/i", "", $content);
+
+        // 플래시의 액션스크립트와 자바스크립트의 연동을 차단하여 악의적인 사이트로의 이동을 막는다.
+        // value="always" 를 value="never" 로, allowScriptaccess="always" 를 allowScriptaccess="never" 로 변환하는데 목적이 있다.
+        $content = preg_replace("/((?<=\<param|\<embed)[^>]+)(\s*=\s*[\'\"]?)always([\'\"]?)([^>]+(?=\>))/i", "$1$2never$3$4", $content);
 
         // 이미지 태그의 src 속성에 삭제등의 링크가 있는 경우 게시물을 확인하는 것만으로도 데이터의 위변조가 가능하므로 이것을 막음
         $content = preg_replace("/<(img[^>]+delete\.php[^>]+bo_table[^>]+)/i", "*** CSRF 감지 : &lt;$1", $content);
         $content = preg_replace("/<(img[^>]+delete_comment\.php[^>]+bo_table[^>]+)/i", "*** CSRF 감지 : &lt;$1", $content);
         $content = preg_replace("/<(img[^>]+logout\.php[^>]+)/i", "*** CSRF 감지 : &lt;$1", $content);
         $content = preg_replace("/<(img[^>]+download\.php[^>]+bo_table[^>]+)/i", "*** CSRF 감지 : &lt;$1", $content);
-
-        // 이런 경우를 방지함 <IMG STYLE="xss:expr/*XSS*/ession(alert('XSS'))">
-        //$content = preg_replace("#\/\*.*\*\/#iU", "", $content); // 이 코드를 위로 올립니다.
 
         $pattern = "";
         $pattern .= "(e|&#(x65|101);?)";
@@ -502,15 +504,8 @@ function conv_content($content, $html)
         $pattern .= "(i|&#(x6a|105);?)";
         $pattern .= "(o|&#(x6f|111);?)";
         $pattern .= "(n|&#(x6e|110);?)";
-        $content = preg_replace("/".$pattern."/i", "__EXPRESSION__", $content);
-
-        /*
-        $content = preg_replace("/\#/", "&#35;", $content);
-        $content = preg_replace("/\</", "&lt;", $content);
-        $content = preg_replace("/\>/", "&gt;", $content);
-        $content = preg_replace("/\(/", "&#40;", $content);
-        $content = preg_replace("/\)/", "&#41;", $content);
-        */
+        //$content = preg_replace("/".$pattern."/i", "__EXPRESSION__", $content);
+        $content = preg_replace("/<[^>]*".$pattern."/i", "__EXPRESSION__", $content); 
     }
     else // text 이면
     {
@@ -539,11 +534,16 @@ function get_sql_search($search_ca_name, $search_field, $search_text, $search_op
     if ($search_ca_name)
         $str = " ca_name = '$search_ca_name' ";
 
-    // 게시판에서 \ 를 검색할 수 있도록 수정
+    $search_text = strip_tags(($search_text));
     $search_text = trim(stripslashes($search_text));
 
-    if (!$search_text)
-        return $str;
+    if (!$search_text) {
+        if ($search_ca_name) {
+            return $str;
+        } else {
+            return '0';
+        }
+    }
 
     if ($str)
         $str .= " and ";
@@ -553,7 +553,7 @@ function get_sql_search($search_ca_name, $search_field, $search_text, $search_op
 
     // 검색어를 구분자로 나눈다. 여기서는 공백
     $s = array();
-    $s = explode(" ", strip_tags($search_text));
+    $s = explode(" ", $search_text);
 
     // 검색필드를 구분자로 나눈다. 여기서는 +
     //$field = array();
@@ -562,13 +562,6 @@ function get_sql_search($search_ca_name, $search_field, $search_text, $search_op
     $tmp = explode(",", trim($search_field));
     $field = explode("||", $tmp[0]);
     $not_comment = $tmp[1];
-
-    if(trim($tmp[0]) == "")
-	{
-		$str .= "(1)";
-	}
-	else
-	{
 
     $str .= "(";
     for ($i=0; $i<count($s); $i++) {
@@ -607,23 +600,28 @@ function get_sql_search($search_ca_name, $search_field, $search_text, $search_op
                     $str .= "$field[$k] = ".((-1)*$s[$i]);
                     break;
                 // LIKE 보다 INSTR 속도가 빠름
+				case "wr_ip" : 
+                case "wr_password" : 
+                    $str .= "1=0"; // 항상 거짓 
+                    break; 
+                // LIKE 보다 INSTR 속도가 빠름 
+
                 default :
                     if (preg_match("/[a-zA-Z]/", $search_str))
                         $str .= "INSTR(LOWER($field[$k]), LOWER('$search_str'))";
                     else
-                        $str .= "INSTR({$field[$k]}, '$search_str')";
+                        $str .= "INSTR($field[$k], '$search_str')";
                     break;
             }
             $op2 = " or ";
         }
         $str .= ")";
 
-        //$op1 = ($search_operator) ? ' and ' : ' or ';
         $op1 = " $search_operator ";
     }
     $str .= " ) ";
 
-    }
+
     if ($not_comment)
         $str .= " and wr_is_comment = '0' ";
 
@@ -1415,7 +1413,7 @@ function check_string($str, $options)
             }
         }
         // 공백
-        else if ($oc >= 0x20) {
+        else if ($oc == 0x20) {
             if ($options & _G4_SPACE_) {
                 $s .= $c;
             }
