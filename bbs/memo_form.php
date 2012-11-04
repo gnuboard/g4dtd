@@ -1,6 +1,8 @@
 <?php
 include_once("./_common.php");
 
+$me_id = mysql_real_escape_string($me_id); 
+
 if (!$member[mb_id])
     alert_close("회원만 이용하실 수 있습니다.");
 
