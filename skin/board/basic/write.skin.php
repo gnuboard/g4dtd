@@ -8,8 +8,9 @@ if ($is_file) {
     else // 제한 있을 때
         $flen_each = $flen_limit;
 }
-?>
 
+echo smarteditor_load();
+?>
 <script type="text/javascript">
 // 글자수 제한
 // 이 코드는 board.skin.js 위에 선언이 되어야 합니다.
@@ -98,7 +99,7 @@ var ca_name = "<?php echo $write['ca_name']?>";
                 <div class="right"><?php if ($write_min || $write_max) { ?><span id="char_count"></span>글자<?php } ?></div>
             </div>
             <?php } ?>
-            <textarea id="wr_content" name="wr_content" class="textarea required <?php if ($is_dhtml_editor) echo 'geditor'; ?>" rows="10" cols="1" title="내용"><?php echo $content?></textarea>
+            <?php if ($is_dhtml_editor) { echo smarteditor_run("wr_content", $write['wr_content']); } ?>
         </td>
     </tr>
 
