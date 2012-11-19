@@ -8,9 +8,10 @@ if ($is_file) {
     else // 제한 있을 때
         $flen_each = $flen_limit;
 }
-
-echo smarteditor_load();
 ?>
+
+<?php if($is_dhtml_editor) { echo editor_load(); } ?>
+
 <script type="text/javascript">
 // 글자수 제한
 // 이 코드는 board.skin.js 위에 선언이 되어야 합니다.
@@ -89,7 +90,9 @@ var ca_name = "<?php echo $write['ca_name']?>";
     </tr>
     <tr>
         <td colspan="2">
-            <?php if(!$is_dhtml_editor){?>
+            <?php if($is_dhtml_editor){?>
+            <?php echo editor_run("wr_content", $write['wr_content']); ?>
+            <?php } else {?>
             <div class="textarea_control">
                 <div class="float">
                     <span class="button" onclick="javascript:textarea_decrease('wr_content', 10);"><img src="<?php echo $board_skin_path?>/img/btn_txt_up.gif" alt="줄이기" /></span>
@@ -99,7 +102,7 @@ var ca_name = "<?php echo $write['ca_name']?>";
                 <div class="right"><?php if ($write_min || $write_max) { ?><span id="char_count"></span>글자<?php } ?></div>
             </div>
             <?php } ?>
-            <?php if ($is_dhtml_editor) { echo smarteditor_run("wr_content", $write['wr_content']); } ?>
+            
         </td>
     </tr>
 
@@ -232,7 +235,11 @@ $(function() {
     $("#fwrite")
     .attr("autocomplete", "off")
     .submit(function() {
-        <?php echo smarteditor_update("wr_content"); ?>
+        <?php 
+        if($is_dhtml_editor){
+            echo editor_submit("wr_content"); 
+        }
+        ?>
 
         if($("#char_count") && (char_min > 0 || char_max > 0)) {
             var cnt = parseInt($("#char_count").html());
@@ -287,5 +294,3 @@ $(function() {
 });
 //]]>
 </script>
-
-<?php if ($is_dhtml_editor) { ?><script type='text/javascript' src='<?php echo $g4['geditor_path']?>/geditor.js'></script><?php } ?>

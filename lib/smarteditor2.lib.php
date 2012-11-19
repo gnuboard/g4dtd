@@ -1,10 +1,10 @@
 <?
 if (!defined('_GNUBOARD_')) exit;
 
-function smarteditor_load()
+function editor_load()
 {
     global $g4;
-    return "<script type=\"text/javascript\" src=\"{$g4['se_path']}/js/HuskyEZCreator.js\"></script>\n"
+    return "<script type=\"text/javascript\" src=\"{$g4['editor_path']}/js/HuskyEZCreator.js\"></script>\n"
          . "<script type=\"text/javascript\"> var oEditors = []; </script>\n";
 }
 
@@ -13,7 +13,7 @@ id 는 textarea 의 id element 를 말한다.
 content 는 textarea 의 내용(값)을 말한다. 수정시에 저장된 값을 노출할때 사용된다.
 폭은 거의 100%로 사용하므로 앞에 height 를 놓았다.
 */
-function smarteditor_run($element_id, $content, $height='400', $width='100%')
+function editor_run($element_id, $content, $height='400', $width='100%')
 {
     global $g4;
     $height = (int)$height;
@@ -22,7 +22,7 @@ function smarteditor_run($element_id, $content, $height='400', $width='100%')
     nhn.husky.EZCreator.createInIFrame({
         oAppRef: oEditors,
         elPlaceHolder: \"$element_id\",
-        sSkinURI: \"{$g4['se_path']}/SmartEditor2Skin.php\",
+        sSkinURI: \"{$g4['editor_path']}/SmartEditor2Skin.php\",
         htParams : {
             bUseToolbar : true,
             fOnBeforeUnload : function(){
@@ -37,7 +37,7 @@ function smarteditor_run($element_id, $content, $height='400', $width='100%')
     </script>\n";
 }
 
-function smarteditor_update($element_id)
+function editor_submit($element_id)
 {
     return "oEditors.getById[\"$element_id\"].exec(\"UPDATE_CONTENTS_FIELD\", []);\n";
 }

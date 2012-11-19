@@ -66,6 +66,8 @@ if ($is_admin != "super") {
 
 $g4[title] = $html_title;
 include_once ("./admin.head.php");
+
+echo dhtml_editor_load();
 ?>
 
 <?php echo subtitle("게시판 생성"); ?>
@@ -608,8 +610,6 @@ function fboardform_submit(f) {
 }
 //]]>
 </script>
-
-<script type="text/javascript" src="<?php echo $g4[path]?>/geditor/geditor.js"></script>
 
 <?php
 include_once ("./admin.tail.php");

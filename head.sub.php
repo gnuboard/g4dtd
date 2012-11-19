@@ -87,6 +87,8 @@ var g4_charset   = "<?php echo $g4['charset']?>";
 var g4_cookie_domain = "<?php echo $g4['cookie_domain']?>";
 var g4_is_gecko  = navigator.userAgent.toLowerCase().indexOf('gecko') != -1;
 var g4_is_ie     = navigator.userAgent.toLowerCase().indexOf('msie') != -1;
+var g4_editor_path="<?php echo $g4['editor_path']?>";
+var g4_editor_url= "<?php echo $g4['editor_url']?>";
 <?php if($is_admin) { echo "var g4_admin = '{$g4['admin']}';\n"; } ?>
 //]]>
 </script>

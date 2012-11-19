@@ -10,7 +10,7 @@ geditor = function(name) {
     /////////////// 사용자 설정 시작 ///////////////
 
     // geditor.js 파일 경로
-    var ge_path             = g4_path + '/geditor';
+    var ge_path             = g4_editor_path;
 
     // 상단 툴바 이미지 경로
     var ge_icon_path        = ge_path + '/icons';
@@ -1552,4 +1552,4 @@ function geditor_load() {
     }
 }
 
-geditor_load();
+//geditor_load();

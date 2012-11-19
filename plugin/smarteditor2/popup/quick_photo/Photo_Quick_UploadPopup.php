@@ -90,10 +90,6 @@ h1{color:#333;font-size:14px;letter-spacing:-1px}
 </div>
 <script type="text/javascript" src="jindo.min.js" charset="utf-8"></script>
 <script type="text/javascript" src="jindo_fileUpload.js" charset="utf-8"></script>
-<script type="text/javascript">
-var g4_se_path = "<?=$g4['se_path']?>";
-var g4_se_url  = "<?=$g4['se_url']?>";
-</script>
 <script type="text/javascript" src="QuickPhotoPopup.js" charset="utf-8"></script>
 <?
 include_once($g4['path']."/tail.sub.php");

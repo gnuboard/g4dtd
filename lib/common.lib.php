@@ -1564,4 +1564,20 @@ function is_utf8($str)
     return true; 
 }
 
+// 중복되는 파일명의 .확장자 앞에 (n) 을 추가하여 반환
+function duplicate_filename($path, $filename)
+{
+    $pos = strrpos($filename, '.');
+    if ($pos === false) return $path.'/'.$filename;
+    $file = substr($filename, 0, $pos);
+    $ext  = substr($filename, $pos, strlen($filename));
+
+    $count = 1;
+    $count_str = "";
+    do {
+        $real_filename = abs(ip2long($_SERVER['REMOTE_ADDR'])).'_'.str_replace('%', '', urlencode($file)).$count_str.urlencode($ext);
+        $count_str = "(".$count++.")";
+    } while (file_exists($path.'/'.$real_filename));
+    return $real_filename;
+}
 ?>

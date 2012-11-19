@@ -6,6 +6,9 @@ if(function_exists('date_default_timezone_set')) {
     date_default_timezone_set('Asia/Seoul');
 }
 
+//$g4['editor']       = 'smarteditor2';
+$g4['editor']         = 'geditor';
+
 // 디렉토리
 $g4['bbs']            = 'bbs';
 $g4['bbs_path']       = $g4['path'] . "/" . $g4['bbs'];
@@ -14,9 +17,6 @@ $g4['bbs_img_path']   = $g4['path'] . '/' . $g4['bbs'] . '/' . $g4['bbs_img'];
 
 $g4['admin']          = 'adm';
 $g4['admin_path']     = $g4['path'] . '/' . $g4['admin'];
-
-$g4['geditor']        = 'geditor';
-$g4['geditor_path']   = $g4['path'] . '/' . $g4['geditor'];
 
 $g4['session_path']   = $g4['path'] . '/data/session';
 
