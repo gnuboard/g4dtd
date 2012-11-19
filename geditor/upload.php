@@ -61,7 +61,7 @@ move_uploaded_file($file[tmp_name], $dest_file);
 
 chmod($dest_file, 0606);
 
-$file = dirname($HTTP_SERVER_VARS["PHP_SELF"]).'/'.$dest_file;
+$file = dirname($_SERVER["PHP_SELF"]).'/'.$dest_file;
 
 setCookie('ge_token', $token);
 setCookie('ge_file', $dest_file);

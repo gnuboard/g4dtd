@@ -201,7 +201,7 @@ include_once($g4['path'].'/lib/common.lib.php'); // 공통 라이브러리
 // config.php 가 있는곳의 웹경로
 if(!$g4['url']) {
     $g4['url'] = 'http://' . $_SERVER['HTTP_HOST'];
-    $dir = dirname($HTTP_SERVER_VARS["PHP_SELF"]);
+    $dir = dirname($_SERVER["PHP_SELF"]);
     if(!file_exists('config.php')) $dir = dirname($dir);
 
     $cnt = substr_count($g4['path'], "..");
