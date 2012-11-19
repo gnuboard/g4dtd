@@ -228,24 +228,12 @@ $(function() {
         flen--;
     });
 
-    $("#wr_content")
-    .load(function() {
-        if($(this).hasClass("geditor")) {
-            $(this).attr("geditor", "geditor");
-        }
-    })
-    .keyup(function() {
-        if(char_min || char_max) {
-            check_byte('wr_content', 'char_count');
-        }
-    })
-    .trigger("load")
-    .trigger("keyup");
-
     // 포커스
     $("#fwrite")
     .attr("autocomplete", "off")
     .submit(function() {
+        <?php echo smarteditor_update("wr_content"); ?>
+
         if($("#char_count") && (char_min > 0 || char_max > 0)) {
             var cnt = parseInt($("#char_count").html());
             if (char_min > 0 && char_min > cnt) {

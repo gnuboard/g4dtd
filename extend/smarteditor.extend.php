@@ -10,3 +10,4 @@ $g4['se_path']      = $g4['path'].'/plugin/smarteditor2';
 $g4['se_data_path'] = $g4['path'].'/data/smarteditor2';
 
 include_once("$g4[path]/lib/smarteditor2.lib.php");
+?>
