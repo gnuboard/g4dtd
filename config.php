@@ -6,8 +6,13 @@ if(function_exists('date_default_timezone_set')) {
     date_default_timezone_set('Asia/Seoul');
 }
 
-//$g4['editor']       = 'smarteditor2';
-$g4['editor']         = 'geditor';
+/*
+DHTML EDITOR 는 기본적으로 smarteditor2, geditor 를 사용할수 있습니다.
+기본 에디터는 smarteditor2 이며 네이버에서 LGPL v2로 제공합니다.
+geditor 는 SIR 에서 개발하였으며 GPL v2로 제공합니다.
+http://dev.naver.com/projects/smarteditor
+*/
+$g4['editor']         = 'smarteditor2';
 
 // 디렉토리
 $g4['bbs']            = 'bbs';

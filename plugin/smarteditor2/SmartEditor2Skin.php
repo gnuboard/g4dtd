@@ -14,8 +14,7 @@ include_once("_common.php");
 <script type="text/javascript" src="./js/jindo_component.js" charset="utf-8"></script>
 <script type="text/javascript" src="./js/SE2B_Configuration.js" charset="utf-8"></script>
 <script type="text/javascript" src="./js/SE2BasicCreator.js" charset="utf-8"></script>
-
-<script src='js/loader-min.js' charset='utf-8'></script>
+<script type="text/javascript" src='./js/loader-min.js' charset='utf-8'></script>
 <style type="text/css">
 body{margin:0; padding:0;}
 </style>
@@ -26,6 +25,14 @@ body{margin:0; padding:0;}
 <div id="smart_editor2">
 	<div id="smart_editor2_content"><a href="#se2_iframe" class="blind">글쓰기영역으로 가기</a>
 		<div class="se2_tool">
+			<!-- icon toolbar -->
+			<div class="se2_icon_tool" style="display:block;">
+				<ul class="se2_itool1">
+					<li class="se2_mn husky_seditor_ui_photo_attach"><button type="button" class="se2_photo se2_wty2_ic se2_mfirst"><span class="se2_icon"></span><span class="se2_mntxt">사진</span></button></li>
+				</ul>
+			</div>
+			<!-- //704이상 -->
+							
 			<!-- 텍스트 툴바 -->
 			<div class="se2_text_tool">
 				<ul class="se2_font_type">
@@ -213,12 +220,18 @@ body{margin:0; padding:0;}
 						</div>
 						<!-- //줄간격 레이어 -->
 					</li>
-				</ul>
-				<ul class="se2_etc">
-                    <li class="husky_seditor_ui_orderedlist"><button type="button" title="번호매기기" class="se2_ol"><span>번호매기기</span></button></li>
-                    <li class="husky_seditor_ui_unorderedlist"><button type="button" title="글머리기호" class="se2_ul"><span>글머리기호</span></button></li>
-                    <li class="husky_seditor_ui_outdent"><button type="button" title="내어쓰기" class="se2_indent"><span>내어쓰기[Tab]</span></button></li>
-                    <li class="husky_seditor_ui_indent"><button type="button" title="들여쓰기" class="se2_outdent"><span>들여쓰기[Shift+Tab]</span></button></li>
+					</ul>
+					<ul class="se2_etc se2_text_tool_view_more">
+					<li class="husky_seditor_ui_text_more " id="se2_text_more"><button title="더보기" type="button" class="se2_text_tool_more"><span>더보기</span></button>
+						<div class="se2_sub_text_tool se2_sub_step1">
+							<ul class="se2_etc">
+							<li class="husky_seditor_ui_orderedlist"><button type="button" title="번호매기기" class="se2_ol"><span>번호매기기</span></button></li>
+							<li class="husky_seditor_ui_unorderedlist"><button type="button" title="글머리기호" class="se2_ul"><span>글머리기호</span></button></li>
+							<li class="husky_seditor_ui_outdent"><button type="button" title="내어쓰기" class="se2_indent"><span>내어쓰기</span></button></li>
+							<li class="husky_seditor_ui_indent"><button type="button" title="들여쓰기" class="se2_outdent"><span>들여쓰기</span></button></li>
+							</ul>
+						</div>
+					</li>
 				</ul>
 				<ul class="se2_etc">				
 				<li class="husky_seditor_ui_quote"><button type="button" title="인용구" class="se2_blockquote"><span>인용구</span></button>
@@ -479,13 +492,6 @@ body{margin:0; padding:0;}
 				</li>
 				</ul>
 			</div>
-			<!-- icon toolbar -->
-			<div class="se2_icon_tool" style="display:block;">
-				<ul class="se2_itool1">
-					<li class="se2_mn husky_seditor_ui_photo_attach"><button type="button" class="se2_photo se2_wty2_ic se2_mfirst"><span class="se2_icon"></span><span class="se2_mntxt">사진</span></button></li>
-				</ul>
-			</div>
-			<!-- //704이상 -->
 		</div>		
 		<hr>
 		<!-- 입력 -->

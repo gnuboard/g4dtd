@@ -36,7 +36,6 @@ var fnUploadImage = null;
 
 //File API 지원 여부로 결정
 function checkDragAndDropAPI(){
-    /*
     try{
         if( !oNavigator.ie ){
             if(!!oNavigator.safari && oNavigator.version <= 5){
@@ -50,9 +49,6 @@ function checkDragAndDropAPI(){
     }catch(e){
         bSupportDragAndDropAPI = false;
     }
-    */
-    // html5 미지원으로만 사용
-    bSupportDragAndDropAPI = false;
 }
 
 //--------------- html5 미지원 브라우저에서 (IE9 이하) ---------------
@@ -73,8 +69,7 @@ function checkDragAndDropAPI(){
  function goReadyMode(){
      var sSrc = welBtnConfirm.attr("src")|| "";
      if(sSrc.indexOf("btn_confirm2.png") >= 0 ){
-         //fnUploadImage.detach(welBtnConfirm.$value(), "click");
-         fnUploadImage.detach(welBtnConfirm.$value(), "keyup");
+         fnUploadImage.detach(welBtnConfirm.$value(), "click");
          welBtnConfirm.attr("src","../../img/photoQuickPopup/btn_confirm.png");
      }
  }   
@@ -479,8 +474,8 @@ function callFileUploader (){
     oFileUploader = new jindo.FileUploader(jindo.$("uploadInputBox"),{
         sUrl  : g4_editor_url+'/popup/quick_photo/FileUploader.php',	//샘플 URL입니다.
         sCallback : location.href.replace(/\/[^\/]*$/, '') + '/callback.html',	//업로드 이후에 iframe이 redirect될 콜백페이지의 주소
-        sFiletype : "*.jpg;*.png;*.gif",						//허용할 파일의 형식. ex) "*", "*.*", "*.jpg", 구분자(;)	
-        sMsgNotAllowedExt : 'JPG, GIF, PNG 확장자만 가능합니다',	//허용할 파일의 형식이 아닌경우에 띄워주는 경고창의 문구
+        sFiletype : "*.jpg;*.png;*.bmp;*.gif",						//허용할 파일의 형식. ex) "*", "*.*", "*.jpg", 구분자(;)	
+        sMsgNotAllowedExt : 'JPG, GIF, PNG, BMP 확장자만 가능합니다',	//허용할 파일의 형식이 아닌경우에 띄워주는 경고창의 문구
         bAutoUpload : false,									 	//파일이 선택됨과 동시에 자동으로 업로드를 수행할지 여부 (upload 메소드 수행)
         bAutoReset : true 											// 업로드한 직후에 파일폼을 리셋 시킬지 여부 (reset 메소드 수행)
     }).attach({
@@ -541,6 +536,7 @@ function closeWindow(){
 
 window.onload = function(){
     checkDragAndDropAPI();
+    
     
     if(bSupportDragAndDropAPI){
         $Element("pop_container2").hide();

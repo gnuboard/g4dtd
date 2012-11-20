@@ -67,7 +67,7 @@ if ($is_admin != "super") {
 $g4[title] = $html_title;
 include_once ("./admin.head.php");
 
-echo dhtml_editor_load();
+echo editor_load();
 ?>
 
 <?php echo subtitle("게시판 생성"); ?>
@@ -494,18 +494,18 @@ if (!preg_match("/([m|M])$/", $upload_max_filesize)) {
 <tr>
     <td><input type='checkbox' name='chk_content_head' value='1' /></td>
     <th>상단 내용</th>
-    <td><textarea id='bo_content_head' name='bo_content_head' class='textarea' rows='10' cols="90" geditor><?php echo $board[bo_content_head] ?></textarea></td>
+    <td><?=editor_run('bo_content_head', $board['bo_content_head'], 200);?></textarea></td>
 </tr>
 <tr class="heavy">
     <td><input type='checkbox' name='chk_content_tail' value='1' /></td>
     <th>하단 내용</th>
-    <td><textarea id='bo_content_tail' name='bo_content_tail' class='textarea' rows='10' cols="90" geditor><?php echo $board[bo_content_tail] ?></textarea></td>
+    <td><?=editor_run('bo_content_tail', $board['bo_content_tail'], 200);?></textarea></td>
 </tr>
 
 <tr class="heavy">
     <td><input type='checkbox' name='chk_insert_content' value='1' /></td>
     <th>글쓰기 기본 내용</th>
-    <td><textarea name='bo_insert_content' rows='10' cols='90' class='textarea'><?php echo $board[bo_insert_content] ?></textarea></td>
+    <td><?=editor_run('bo_insert_content', $board['bo_insert_content'], 200);?></textarea></td>
 </tr>
 
 <tr>
@@ -571,6 +571,57 @@ function set_point(f) {
     }
 }
 
+var fboardform_submit = (function() {
+    var submitted = false;
+
+    return function(f) {
+        if (submitted) return false;
+
+        <?=editor_submit('bo_content_head');?>
+        <?=editor_submit('bo_content_tail');?>
+        <?=editor_submit('bo_insert_content');?>
+
+        var tmp_title;
+        var tmp_image;
+
+        tmp_title = "상단";
+        tmp_image = f.bo_image_head;
+        if (tmp_image.value) {
+            if (!tmp_image.value.toLowerCase().match(/.(gif|jpg|png)$/i)) {
+                alert(tmp_title + "이미지가 gif, jpg, png 파일이 아닙니다.");
+                return false;
+            }
+        }
+
+        tmp_title = "하단";
+        tmp_image = f.bo_image_tail;
+        if (tmp_image.value) {
+            if (!tmp_image.value.toLowerCase().match(/.(gif|jpg|png)$/i)) {
+                alert(tmp_title + "이미지가 gif, jpg, png 파일이 아닙니다.");
+                return false;
+            }
+        }
+
+        if (parseInt(f.bo_count_modify.value) < 1) {
+            alert("원글 수정 불가 코멘트수는 1 이상 입력하셔야 합니다.");
+            f.bo_count_modify.focus();
+            return false;
+        }
+
+        if (parseInt(f.bo_count_delete.value) < 1) {
+            alert("원글 삭제 불가 코멘트수는 1 이상 입력하셔야 합니다.");
+            f.bo_count_delete.focus();
+            return false;
+        }
+
+        f.action = "./board_form_update.php";
+        return true;
+    }
+
+    submitted = true;
+}());
+
+/*
 function fboardform_submit(f) {
     var tmp_title;
     var tmp_image;
@@ -608,6 +659,7 @@ function fboardform_submit(f) {
     f.action = "./board_form_update.php";
     return true;
 }
+*/
 //]]>
 </script>
 
