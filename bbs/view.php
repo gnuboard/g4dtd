@@ -141,7 +141,7 @@ function lightbox_view($matches)
     }
 }
 if(ini_get("allow_url_fopen") == 1){
-    $view['content'] = preg_replace_callback("#\<img.*src=\"([^\"]+)\"[^\>]*\>#i", "lightbox_view", $view['content']);
+    $view['content'] = preg_replace_callback("#<img[^>]*src=\"([^\"]+)\"[^>]*>#i", "lightbox_view", $view['content']);
 }
 
 // 트랙백
