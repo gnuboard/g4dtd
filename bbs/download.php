@@ -1,6 +1,8 @@
 <?php
 include_once("./_common.php");
 
+$no = (int)$no;
+
 @include_once("$board_skin_path/download.head.skin.php");
 
 // 쿠키에 저장된 ID값과 넘어온 ID값을 비교하여 같지 않을 경우 오류 발생
